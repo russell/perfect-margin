@@ -255,7 +255,8 @@ WIN will be any visible window, including the minimap window."
       (let ((init-window-margins (perfect-margin--init-window-margins)))
         (set-window-margins win (car init-window-margins) (cdr init-window-margins))))
      (t (set-window-margins win (if (perfect-margin-with-linum-p) 3 0) 0)))
-    (set-window-fringes win 0 0)))
+    (unless (perfect-margin--auto-margin-ignore-p win)
+      (set-window-fringes win 0 0))))
 
 (defun perfect-margin-margin-frame (&optional _)
   "Hook to resize window when frame size change."
